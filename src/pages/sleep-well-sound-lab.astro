@@ -1,0 +1,411 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+	title="Sleep Well Sound Lab - Deep Sleep & Focus Soundscapes" 
+	description="Quiet is more than the absence of sound; it is the presence of peace. Discover custom-designed acoustic environments engineered to raise the auditory baseline, block distractions, and help overactive minds find deep, restful sleep."
+>
+	<!-- Hero Section -->
+	<section class="channel-hero">
+		<div class="hero-glow"></div>
+		<div class="container hero-container">
+			<span class="badge sleep-badge">Official YouTube Channel</span>
+			<h1 class="page-title">Sleep Well <br/><span class="text-gradient">Sound Lab</span></h1>
+			<p class="page-lead">
+				Quiet is more than the absence of sound; it is the presence of peace. In a world that is always on, finding a way to truly shut down at the end of the day is a universal challenge. Sleep Well Sound Lab offers custom-designed acoustic environments engineered to raise the auditory baseline, block distractions, and help overactive minds find deep, restful sleep.
+			</p>
+			<div class="cta-actions">
+				<a href="https://www.youtube.com/@SleepWellSoundLab?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="btn btn-yt-primary">
+					<svg viewBox="0 0 24 24" class="btn-yt-icon" fill="currentColor">
+						<path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.5 12 3.5 12 3.5s-7.518 0-9.388.553a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.553 9.388.553 9.388.553s7.518 0 9.388-.553a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+					</svg>
+					Subscribe on YouTube
+				</a>
+				<a href="/#player" class="btn btn-secondary">Try Sound Generator</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Featured Videos Section -->
+	<section class="videos-section">
+		<div class="container">
+			<div class="section-header text-center">
+				<span class="sub-badge">Featured Listening</span>
+				<h2>Popular Sound Labs</h2>
+				<p>12-hour continuous auditory shields engineered for deep sleep, cortisol reduction, and focus. Black screen with no mid-roll ads.</p>
+			</div>
+
+			<div class="grid grid-3-col">
+				<!-- Video Card 1 -->
+				<div class="glass-card video-card">
+					<a href="https://www.youtube.com/watch?v=SfNwwV6Yf9E" target="_blank" rel="noopener noreferrer" class="video-preview-link">
+						<div class="video-preview">
+							<div class="video-overlay-glow"></div>
+							<div class="play-btn">
+								<svg viewBox="0 0 24 24" class="play-icon-svg" fill="currentColor">
+									<path d="M8 5v14l11-7z"/>
+								</svg>
+							</div>
+							<span class="duration">12:00:00</span>
+						</div>
+					</a>
+					<div class="video-meta">
+						<h4>Subterranean Rainfall</h4>
+						<p class="video-desc">Brown & White Noise for Sleep & Focus | Black Screen | No Ads</p>
+						<a href="https://www.youtube.com/watch?v=SfNwwV6Yf9E" target="_blank" rel="noopener noreferrer" class="video-link-btn">Listen on YouTube →</a>
+					</div>
+				</div>
+
+				<!-- Video Card 2 -->
+				<div class="glass-card video-card">
+					<a href="https://www.youtube.com/watch?v=jfzF3eK3q3A" target="_blank" rel="noopener noreferrer" class="video-preview-link">
+						<div class="video-preview">
+							<div class="video-overlay-glow"></div>
+							<div class="play-btn">
+								<svg viewBox="0 0 24 24" class="play-icon-svg" fill="currentColor">
+									<path d="M8 5v14l11-7z"/>
+								</svg>
+							</div>
+							<span class="duration">12:00:00</span>
+						</div>
+					</a>
+					<div class="video-meta">
+						<h4>Coastal Calm</h4>
+						<p class="video-desc">Brown & White Noise for Cortisol Reduction | Black Screen | No Ads</p>
+						<a href="https://www.youtube.com/watch?v=jfzF3eK3q3A" target="_blank" rel="noopener noreferrer" class="video-link-btn">Listen on YouTube →</a>
+					</div>
+				</div>
+
+				<!-- Video Card 3 -->
+				<div class="glass-card video-card">
+					<a href="https://www.youtube.com/watch?v=nJE-zI_UUO0" target="_blank" rel="noopener noreferrer" class="video-preview-link">
+						<div class="video-preview">
+							<div class="video-overlay-glow"></div>
+							<div class="play-btn">
+								<svg viewBox="0 0 24 24" class="play-icon-svg" fill="currentColor">
+									<path d="M8 5v14l11-7z"/>
+								</svg>
+							</div>
+							<span class="duration">12:00:00</span>
+						</div>
+					</a>
+					<div class="video-meta">
+						<h4>Wind Tunnel White Noise</h4>
+						<p class="video-desc">Sleep & Focus | Black Screen | No Ads</p>
+						<a href="https://www.youtube.com/watch?v=nJE-zI_UUO0" target="_blank" rel="noopener noreferrer" class="video-link-btn">Listen on YouTube →</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	/* Hero Section */
+	.channel-hero {
+		position: relative;
+		padding: 8rem 2rem 5rem 2rem;
+		text-align: center;
+		overflow: hidden;
+	}
+
+	.hero-glow {
+		position: absolute;
+		top: -150px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 900px;
+		height: 450px;
+		background: radial-gradient(circle, rgba(127, 0, 255, 0.18) 0%, rgba(79, 172, 254, 0.08) 50%, transparent 100%);
+		filter: blur(80px);
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.hero-container {
+		position: relative;
+		z-index: 10;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.badge {
+		background: rgba(127, 0, 255, 0.1);
+		border: 1px solid rgba(127, 0, 255, 0.2);
+		color: var(--accent-blue);
+		padding: 0.5rem 1rem;
+		border-radius: 99px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		display: inline-block;
+		margin-bottom: 2rem;
+	}
+
+	.sleep-badge {
+		color: #a855f7;
+		border-color: rgba(168, 85, 247, 0.3);
+		background: rgba(168, 85, 247, 0.08);
+	}
+
+	.page-title {
+		font-size: 4rem;
+		line-height: 1.1;
+		margin-bottom: 1.5rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	.page-lead {
+		font-size: 1.2rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 2.5rem;
+		max-width: 650px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.cta-actions {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1.75rem;
+	}
+
+	/* Buttons */
+	.btn {
+		padding: 0 2rem;
+		border-radius: 12px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		transition: var(--transition-bounce);
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		line-height: 1.2;
+		height: 48px;
+	}
+
+	.btn-yt-primary {
+		background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+		color: #fff;
+		border: 1px solid transparent;
+		box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+	}
+
+	.btn-yt-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+	}
+
+	.btn-yt-icon {
+		width: 18px;
+		height: 18px;
+		display: block;
+		flex-shrink: 0;
+	}
+
+	.btn-secondary {
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-primary);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.2);
+		transform: translateY(-2px);
+	}
+
+	/* Videos Section */
+	.videos-section {
+		padding: 4rem 0 6rem 0;
+	}
+
+	.section-header {
+		max-width: 600px;
+		margin: 0 auto 4rem auto;
+	}
+
+	.section-header h2 {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.sub-badge {
+		color: #a855f7;
+		font-size: 0.85rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		display: block;
+		margin-bottom: 0.75rem;
+	}
+
+	.text-center {
+		text-align: center;
+	}
+
+	/* Video Cards */
+	.video-card {
+		padding: 0;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.video-card:hover {
+		transform: translateY(-6px);
+		border-color: rgba(168, 85, 247, 0.3);
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(127, 0, 255, 0.1);
+	}
+
+	.video-preview-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.video-preview {
+		height: 180px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #172554 100%);
+	}
+
+	.video-overlay-glow {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(circle at center, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+		opacity: 0.7;
+	}
+
+	.play-btn {
+		width: 56px;
+		height: 56px;
+		background: rgba(255, 255, 255, 0.08);
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		z-index: 10;
+		transition: var(--transition-bounce);
+		backdrop-filter: blur(4px);
+		padding: 12px;
+	}
+
+	.play-icon-svg {
+		width: 20px;
+		height: 20px;
+		color: #fff;
+		margin-left: 2px; /* visual centering */
+	}
+
+	.video-card:hover .play-btn {
+		background: #ff0000;
+		border-color: #ff0000;
+		transform: scale(1.1);
+		box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+	}
+
+	.duration {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		background: rgba(0, 0, 0, 0.85);
+		color: #fff;
+		font-size: 0.75rem;
+		font-weight: 600;
+		padding: 0.2rem 0.5rem;
+		border-radius: 4px;
+		z-index: 10;
+	}
+
+	.video-meta {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		flex-grow: 1;
+	}
+
+	.video-meta h4 {
+		font-size: 1.25rem;
+		color: var(--text-primary);
+		line-height: 1.4;
+	}
+
+	.video-desc {
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: var(--text-secondary);
+		flex-grow: 1;
+	}
+
+	.video-link-btn {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #ff3b30;
+		margin-top: 0.5rem;
+		align-self: flex-start;
+		transition: var(--transition-smooth);
+	}
+
+	.video-card:hover .video-link-btn {
+		color: #ff453a;
+		text-shadow: 0 0 8px rgba(255, 69, 58, 0.4);
+	}
+
+	/* Containers & Grids */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.grid {
+		display: grid;
+		gap: 2.5rem;
+	}
+
+	.grid-3-col {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@media (max-width: 900px) {
+		.grid-3-col {
+			grid-template-columns: 1fr;
+		}
+
+		.page-title {
+			font-size: 3rem;
+		}
+		
+		.page-lead {
+			font-size: 1.15rem;
+			padding-left: 1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.cta-actions {
+			flex-direction: column;
+			gap: 1rem;
+		}
+		.btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+</style>

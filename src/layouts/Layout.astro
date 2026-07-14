@@ -10,6 +10,10 @@ const {
 	title = "Functional Audio - Focus, Sleep, & Relaxation through Sound Science", 
 	description = "Discover the science of functional audio. Learn how white, pink, and brown noise help you focus, block distractions, and sleep better." 
 } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/' || pathname === '/index.html' || pathname === '';
+const prefix = isHome ? '' : '/';
 ---
 
 <!DOCTYPE html>
@@ -61,9 +65,15 @@ const {
 					<span class="logo-text">Functional <span class="text-gradient">Audio</span></span>
 				</a>
 				<nav class="nav-links">
-					<a href="#about" class="nav-link">What is it?</a>
-					<a href="#science" class="nav-link">The Science</a>
-					<a href="#player" class="nav-link">Listen</a>
+					<a href={`${prefix}#about`} class="nav-link">What is it?</a>
+					<a href={`${prefix}#science`} class="nav-link">The Science</a>
+					<a href={`${prefix}#player`} class="nav-link">Listen</a>
+					<a href="/sleep-well-sound-lab" class="nav-link">Sleep Lab</a>
+					<a href="https://www.youtube.com/@SleepWellSoundLab" target="_blank" rel="noopener noreferrer" class="nav-link youtube-link" title="YouTube Channel">
+						<svg viewBox="0 0 24 24" class="yt-icon" fill="currentColor">
+							<path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.5 12 3.5 12 3.5s-7.518 0-9.388.553a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.553 9.388.553 9.388.553s7.518 0 9.388-.553a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+						</svg>
+					</a>
 				</nav>
 			</div>
 		</header>
@@ -83,9 +93,14 @@ const {
 				<div class="footer-links">
 					<div class="link-group">
 						<h4>Explore</h4>
-						<a href="#about">About Noise</a>
-						<a href="#science">How It Works</a>
-						<a href="#player">Interactive Player</a>
+						<a href={`${prefix}#about`}>About Noise</a>
+						<a href={`${prefix}#science`}>How It Works</a>
+						<a href={`${prefix}#player`}>Interactive Player</a>
+					</div>
+					<div class="link-group">
+						<h4>Sleep Lab</h4>
+						<a href="/sleep-well-sound-lab">About Sleep Well</a>
+						<a href="https://www.youtube.com/@SleepWellSoundLab" target="_blank" rel="noopener noreferrer">YouTube Channel</a>
 					</div>
 				</div>
 			</div>
@@ -159,6 +174,24 @@ const {
 	.nav-links {
 		display: flex;
 		gap: 2rem;
+		align-items: center;
+	}
+
+	.youtube-link {
+		display: flex;
+		align-items: center;
+	}
+
+	.yt-icon {
+		width: 20px;
+		height: 20px;
+		color: var(--text-secondary);
+		transition: var(--transition-smooth);
+	}
+
+	.youtube-link:hover .yt-icon {
+		color: #ff0000;
+		filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
 	}
 
 	.nav-link {
@@ -215,6 +248,18 @@ const {
 		max-width: 400px;
 		font-size: 0.9rem;
 		line-height: 1.6;
+	}
+
+	.footer-links {
+		display: flex;
+		gap: 4rem;
+	}
+
+	@media (max-width: 480px) {
+		.footer-links {
+			flex-direction: column;
+			gap: 2rem;
+		}
 	}
 
 	.link-group {
