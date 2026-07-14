@@ -1,0 +1,504 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AudioPlayer from '../components/AudioPlayer.astro';
+---
+
+<Layout title="Functional Audio - Pure Focus & Deep Sleep Science">
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="hero-bg-accent"></div>
+		<div class="container hero-content">
+			<span class="badge">Acoustic Engineering</span>
+			<h1 class="hero-title">Harness the Power of <br/><span class="text-gradient">Functional Sound</span></h1>
+			<p class="hero-lead">Functional audio is sound scientifically designed to help you focus, block distractions, calm anxiety, and sleep deeper. Start aligning your cognitive state in one click.</p>
+			<div class="hero-actions">
+				<a href="#player" class="btn btn-primary">Start Listening</a>
+				<a href="#about" class="btn btn-secondary">Learn the Science</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Interactive Laboratory Section -->
+	<section class="lab-section" id="player">
+		<div class="container">
+			<div class="section-header text-center">
+				<span class="sub-badge">Try It Now</span>
+				<h2>The Acoustic Generator</h2>
+				<p>Experience Functional Audio from your browser right now. Choose the profile that matches your mental objective.</p>
+			</div>
+			<AudioPlayer />
+		</div>
+	</section>
+
+	<!-- Educational Section -->
+	<section class="about-section" id="about">
+		<div class="container">
+			<div class="grid grid-2-col">
+				<div class="about-text">
+					<span class="sub-badge">Understanding Sound</span>
+					<h2>What is Functional Audio?</h2>
+					<p>Unlike casual music or environmental recordings, <strong>functional audio</strong> refers to auditory signals engineered with specific spectral profiles or frequency differences to influence your neurological state.</p>
+					<p>By leveraging principles of <em>auditory masking</em> and <em>neural entrainment</em>, these sounds act as a cognitive shield, smoothing out ambient disruptions and aligning your brain's natural electrical oscillations to target activities.</p>
+					
+					<div class="features-list">
+						<div class="feature-item">
+							<div class="feature-icon">⚡</div>
+							<div>
+								<h4>Cognitive Shielding</h4>
+								<p>Raises the auditory threshold to prevent sudden room noises from breaking deep focus.</p>
+							</div>
+						</div>
+						<div class="feature-item">
+							<div class="feature-icon">🧠</div>
+							<div>
+								<h4>Brainwave Alignment</h4>
+								<p>Induces calm or alertness by presenting frequencies that match desired neural cycles.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="about-graphic glass-card">
+					<h3>The Masking Effect</h3>
+					<div class="masking-graphic">
+						<div class="signal-line wave-noise">
+							<span class="label">Ambient Noise Floor</span>
+						</div>
+						<div class="signal-line wave-peak">
+							<span class="label">Sudden Distraction (Dog Bark, Slam)</span>
+						</div>
+						<div class="signal-line wave-functional">
+							<span class="label">Masked Under Functional Noise</span>
+						</div>
+					</div>
+					<p class="graphic-caption">When functional noise is active, it raises the baseline noise floor so sudden spikes are smoothed out and remain unperceived by the subconscious mind.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- The Spectrum Grid -->
+	<section class="spectrum-section" id="science">
+		<div class="container">
+			<div class="section-header text-center">
+				<span class="sub-badge">The Colors of Sound</span>
+				<h2>The Auditory Spectrum</h2>
+				<p>Different frequency distributions produce unique "colors" of noise, each suited to distinct neurological tasks.</p>
+			</div>
+
+			<div class="grid grid-3-col">
+				<!-- White Noise -->
+				<div class="glass-card spectrum-card cyan-border">
+					<div class="spectrum-header">
+						<div class="spectrum-dot bg-cyan"></div>
+						<h3>White Noise</h3>
+					</div>
+					<span class="spectrum-formula">1/f⁰ (Equal Energy)</span>
+					<p>Contains all frequencies across the spectrum of audible sound in equal measure. Sounds like static or a rushing waterfall.</p>
+					<div class="spectrum-use">
+						<strong>Best For:</strong> Blocking high-pitched office chatter, studying, and privacy masking.
+					</div>
+				</div>
+
+				<!-- Pink Noise -->
+				<div class="glass-card spectrum-card blue-border">
+					<div class="spectrum-header">
+						<div class="spectrum-dot bg-blue"></div>
+						<h3>Pink Noise</h3>
+					</div>
+					<span class="spectrum-formula">1/f¹ (Deep Balance)</span>
+					<p>Deeper than white noise. Energy decreases by 3dB per octave. Sounds like steady rainfall or wind in the trees.</p>
+					<div class="spectrum-use">
+						<strong>Best For:</strong> Enhancing memory retention, steady productivity, and restful sleep.
+					</div>
+				</div>
+
+				<!-- Brown Noise -->
+				<div class="glass-card spectrum-card purple-border">
+					<div class="spectrum-header">
+						<div class="spectrum-dot bg-purple"></div>
+						<h3>Brown Noise</h3>
+					</div>
+					<span class="spectrum-formula">1/f² (Rich Resonance)</span>
+					<p>Very deep rumble. Energy drops off by 6dB per octave. Sounds like heavy ocean surf or a distant jet engine.</p>
+					<div class="spectrum-use">
+						<strong>Best For:</strong> ADHD relief, calming mental hyperactivity, and deep sleep.
+					</div>
+				</div>
+			</div>
+
+			<!-- Binaural Beats Card (Full Width Span) -->
+			<div class="glass-card binaural-card margin-top">
+				<div class="binaural-content">
+					<span class="sub-badge bg-grad">Advanced Sound therapy</span>
+					<h3>Binaural Beats & Entrainment</h3>
+					<p>Binaural beats play two distinct frequencies in separate ears (e.g., 200Hz in left ear, 206Hz in right). The brain reconciles the difference as a perceived 6Hz pulse. This 6Hz frequency corresponds to <strong>Theta brainwaves</strong>, which are highly active during deep meditation, REM sleep, and high creativity.</p>
+					<div class="binaural-requirements">
+						<span>🎧 Requires Headphones</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	/* Hero Styling */
+	.hero {
+		position: relative;
+		padding: 8rem 2rem 6rem 2rem;
+		text-align: center;
+		overflow: hidden;
+	}
+
+	.hero-bg-accent {
+		position: absolute;
+		top: -200px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 800px;
+		height: 400px;
+		background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(127, 0, 255, 0.05) 60%, transparent 100%);
+		filter: blur(80px);
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 10;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.badge {
+		background: rgba(0, 242, 254, 0.1);
+		border: 1px solid rgba(0, 242, 254, 0.2);
+		color: var(--accent-cyan);
+		padding: 0.5rem 1rem;
+		border-radius: 99px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		display: inline-block;
+		margin-bottom: 2rem;
+	}
+
+	.sub-badge {
+		color: var(--accent-cyan);
+		font-size: 0.85rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		display: block;
+		margin-bottom: 0.75rem;
+	}
+
+	.hero-title {
+		font-size: 4rem;
+		line-height: 1.1;
+		margin-bottom: 1.5rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	@media (max-width: 768px) {
+		.hero-title {
+			font-size: 2.8rem;
+		}
+	}
+
+	.hero-lead {
+		font-size: 1.2rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 2.5rem;
+		max-width: 650px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero-actions {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	/* Buttons */
+	.btn {
+		padding: 0.85rem 2rem;
+		border-radius: 12px;
+		font-weight: 600;
+		font-size: 0.95rem;
+		transition: var(--transition-bounce);
+		cursor: pointer;
+	}
+
+	.btn-primary {
+		background: var(--grad-primary);
+		color: #060913;
+		box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(0, 242, 254, 0.4);
+	}
+
+	.btn-secondary {
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-primary);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.2);
+		transform: translateY(-2px);
+	}
+
+	/* Container & Grid Setup */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.grid {
+		display: grid;
+		gap: 2.5rem;
+	}
+
+	.grid-2-col {
+		grid-template-columns: 1.2fr 1fr;
+		align-items: center;
+	}
+
+	.grid-3-col {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@media (max-width: 900px) {
+		.grid-2-col, .grid-3-col {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Section Headings */
+	.section-header {
+		max-width: 600px;
+		margin: 0 auto 3rem auto;
+	}
+
+	.section-header h2 {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.text-center {
+		text-align: center;
+	}
+
+	/* Section Spaces */
+	.lab-section {
+		padding: 4rem 0;
+	}
+
+	.about-section {
+		padding: 6rem 0;
+	}
+
+	.spectrum-section {
+		padding: 6rem 0;
+	}
+
+	/* Feature list */
+	.features-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.feature-item {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.feature-icon {
+		font-size: 1.5rem;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		width: 44px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10px;
+		flex-shrink: 0;
+	}
+
+	.feature-item h4 {
+		margin-bottom: 0.25rem;
+		font-size: 1rem;
+		color: var(--text-primary);
+	}
+
+	.feature-item p {
+		font-size: 0.9rem;
+	}
+
+	/* Graphic Component */
+	.about-graphic {
+		padding: 2.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.masking-graphic {
+		height: 160px;
+		background: rgba(4, 6, 12, 0.8);
+		border-radius: 12px;
+		border: 1px solid rgba(255, 255, 255, 0.03);
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.signal-line {
+		height: 24px;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		padding: 0 1rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+	}
+
+	.wave-noise {
+		background: rgba(255, 255, 255, 0.06);
+		color: var(--text-muted);
+		border: 1px dashed rgba(255, 255, 255, 0.1);
+	}
+
+	.wave-peak {
+		background: rgba(239, 68, 68, 0.15);
+		color: #ef4444;
+		border: 1px solid rgba(239, 68, 68, 0.3);
+		transform: translateX(40px);
+		max-width: 80%;
+	}
+
+	.wave-functional {
+		background: linear-gradient(90deg, rgba(0, 242, 254, 0.15), rgba(127, 0, 255, 0.15));
+		color: var(--accent-cyan);
+		border: 1px solid rgba(0, 242, 254, 0.3);
+	}
+
+	.graphic-caption {
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		line-height: 1.5;
+	}
+
+	/* Spectrum Cards */
+	.spectrum-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 2.25rem 2rem;
+	}
+
+	.spectrum-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.spectrum-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+	}
+
+	.bg-cyan { background-color: var(--accent-cyan); box-shadow: 0 0 8px var(--accent-cyan); }
+	.bg-blue { background-color: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); }
+	.bg-purple { background-color: var(--accent-purple); box-shadow: 0 0 8px var(--accent-purple); }
+
+	.cyan-border:hover { border-color: rgba(0, 242, 254, 0.3); }
+	.blue-border:hover { border-color: rgba(79, 172, 254, 0.3); }
+	.purple-border:hover { border-color: rgba(127, 0, 255, 0.3); }
+
+	.spectrum-formula {
+		font-family: monospace;
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		background: rgba(255, 255, 255, 0.03);
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		width: max-content;
+	}
+
+	.spectrum-card p {
+		font-size: 0.95rem;
+		flex-grow: 1;
+	}
+
+	.spectrum-use {
+		font-size: 0.85rem;
+		color: var(--text-secondary);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		padding-top: 1rem;
+	}
+
+	.spectrum-use strong {
+		color: var(--text-primary);
+	}
+
+	/* Binaural Card */
+	.binaural-card {
+		padding: 3rem;
+		background: radial-gradient(circle at top right, rgba(127, 0, 255, 0.08) 0%, rgba(13, 20, 38, 0.45) 60%);
+	}
+
+	.binaural-content {
+		max-width: 800px;
+	}
+
+	.binaural-content h3 {
+		font-size: 1.75rem;
+		margin-bottom: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	.binaural-content p {
+		font-size: 1.05rem;
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+
+	.bg-grad {
+		background: var(--grad-primary);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.binaural-requirements {
+		display: inline-flex;
+		align-items: center;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		padding: 0.5rem 1rem;
+		border-radius: 8px;
+		font-size: 0.85rem;
+		font-weight: 500;
+	}
+
+	.margin-top {
+		margin-top: 3rem;
+	}
+</style>

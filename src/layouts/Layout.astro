@@ -1,0 +1,255 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "Functional Audio - Focus, Sleep, & Relaxation through Sound Science", 
+	description = "Discover the science of functional audio. Learn how white, pink, and brown noise help you focus, block distractions, and sleep better." 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Google Tag Manager -->
+		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-TMSL25JG');</script>
+		<!-- End Google Tag Manager -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://functional-audio.com/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://functional-audio.com/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMSL25JG"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<header class="header">
+			<div class="nav-container">
+				<a href="/" class="logo">
+					<div class="logo-icon">
+						<span class="bar bar-1"></span>
+						<span class="bar bar-2"></span>
+						<span class="bar bar-3"></span>
+						<span class="bar bar-4"></span>
+					</div>
+					<span class="logo-text">Functional <span class="text-gradient">Audio</span></span>
+				</a>
+				<nav class="nav-links">
+					<a href="#about" class="nav-link">What is it?</a>
+					<a href="#science" class="nav-link">The Science</a>
+					<a href="#player" class="nav-link">Listen</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="main-content">
+			<slot />
+		</main>
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-brand">
+					<div class="logo">
+						<span class="logo-text">Functional <span class="text-gradient">Audio</span></span>
+					</div>
+					<p class="footer-desc">Designed to align your focus, quiet your mind, and optimize your rest using scientifically backed auditory environments.</p>
+				</div>
+				<div class="footer-links">
+					<div class="link-group">
+						<h4>Explore</h4>
+						<a href="#about">About Noise</a>
+						<a href="#science">How It Works</a>
+						<a href="#player">Interactive Player</a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; {new Date().getFullYear()} functional-audio.com. All rights reserved.</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	/* Header Styling */
+	.header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: rgba(6, 9, 19, 0.7);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	.nav-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1.25rem 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	/* Logo Brand */
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-weight: 700;
+		font-size: 1.4rem;
+		letter-spacing: -0.03em;
+		font-family: var(--font-display);
+		color: var(--text-primary);
+	}
+
+	.logo-icon {
+		display: flex;
+		align-items: flex-end;
+		gap: 3px;
+		height: 20px;
+		width: 24px;
+	}
+
+	.bar {
+		display: block;
+		width: 3px;
+		background: var(--grad-primary);
+		border-radius: 2px;
+		animation: pulse 1.8s ease-in-out infinite alternate;
+	}
+
+	.bar-1 { height: 40%; animation-delay: 0.1s; }
+	.bar-2 { height: 80%; animation-delay: 0.4s; }
+	.bar-3 { height: 60%; animation-delay: 0.2s; }
+	.bar-4 { height: 100%; animation-delay: 0.6s; }
+
+	@keyframes pulse {
+		0% { transform: scaleY(1); }
+		100% { transform: scaleY(0.4); }
+	}
+
+	/* Navigation Links */
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.nav-link {
+		font-size: 0.95rem;
+		font-weight: 500;
+		color: var(--text-secondary);
+	}
+
+	.nav-link:hover {
+		color: var(--text-primary);
+		text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+	}
+
+	/* Main Content container */
+	.main-content {
+		position: relative;
+		z-index: 10;
+	}
+
+	/* Footer Styling */
+	.footer {
+		background: rgba(4, 6, 12, 0.9);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 4rem 2rem 2rem 2rem;
+		margin-top: 6rem;
+		position: relative;
+		z-index: 10;
+	}
+
+	.footer-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 4rem;
+		margin-bottom: 3rem;
+	}
+
+	@media (max-width: 768px) {
+		.footer-container {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+		.nav-links {
+			display: none; /* simple mobile drawer could go here, keeping navigation simple */
+		}
+	}
+
+	.footer-brand .logo {
+		margin-bottom: 1rem;
+	}
+
+	.footer-desc {
+		max-width: 400px;
+		font-size: 0.9rem;
+		line-height: 1.6;
+	}
+
+	.link-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.link-group h4 {
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+		letter-spacing: 0.05em;
+		color: var(--text-muted);
+	}
+
+	.link-group a {
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+	}
+
+	.link-group a:hover {
+		color: var(--accent-cyan);
+	}
+
+	.footer-bottom {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+</style>

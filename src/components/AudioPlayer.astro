@@ -1,0 +1,617 @@
+---
+// AudioPlayer Component
+---
+
+<div class="player-container glass-card" id="player">
+  <div class="player-header">
+    <div class="pulse-indicator">
+      <span class="pulse-dot"></span>
+      <span class="pulse-text">Web Synthesized • Pure Sound</span>
+    </div>
+    <h3>Acoustic Lab</h3>
+  </div>
+
+  <!-- Visualizer Screen -->
+  <div class="visualizer-container">
+    <canvas id="audio-visualizer" width="600" height="150"></canvas>
+    <div class="visualizer-overlay">
+      <span id="sound-state-label">Select a sound to begin</span>
+    </div>
+  </div>
+
+  <!-- Controller UI -->
+  <div class="player-controls">
+    <div class="sound-selector">
+      <button class="sound-btn active" data-sound="white">
+        <span class="btn-glow"></span>
+        <span class="sound-name">White Noise</span>
+        <span class="sound-meta">Block Distractions</span>
+      </button>
+      <button class="sound-btn" data-sound="pink">
+        <span class="btn-glow"></span>
+        <span class="sound-name">Pink Noise</span>
+        <span class="sound-meta">Deep Focus</span>
+      </button>
+      <button class="sound-btn" data-sound="brown">
+        <span class="btn-glow"></span>
+        <span class="sound-name">Brown Noise</span>
+        <span class="sound-meta">Relax & Sleep</span>
+      </button>
+      <button class="sound-btn" data-sound="binaural">
+        <span class="btn-glow"></span>
+        <span class="sound-name">Binaural Beats</span>
+        <span class="sound-meta">Theta Waves (6Hz)</span>
+      </button>
+    </div>
+
+    <div class="control-bar">
+      <!-- Main Play Button -->
+      <button class="play-trigger" id="play-btn" aria-label="Play Sound">
+        <svg class="play-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M8 5v14l11-7z" id="play-path"></path>
+        </svg>
+      </button>
+
+      <!-- Volume Controller -->
+      <div class="volume-slider-container">
+        <svg class="volume-icon" viewBox="0 0 24 24" width="18" height="18">
+          <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path>
+        </svg>
+        <input type="range" id="volume-range" min="0" max="1" step="0.01" value="0.1" class="volume-range" aria-label="Volume">
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .player-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+  }
+
+  .player-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .pulse-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-cyan);
+  }
+
+  .pulse-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Visualizer */
+  .visualizer-container {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background: rgba(4, 6, 12, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    overflow: hidden;
+  }
+
+  #audio-visualizer {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .visualizer-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, rgba(6, 9, 19, 0) 50%, rgba(6, 9, 19, 0.7) 100%);
+    pointer-events: none;
+  }
+
+  #sound-state-label {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.03em;
+    transition: var(--transition-smooth);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  #sound-state-label.playing {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.6),
+                 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Sound Buttons Grid */
+  .sound-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .sound-selector {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .sound-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+  }
+
+  .sound-btn:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+  }
+
+  .sound-btn.active {
+    background: rgba(0, 242, 254, 0.05);
+    border-color: var(--accent-cyan);
+    color: var(--text-primary);
+  }
+
+  .btn-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .sound-btn.active .btn-glow {
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+
+  .sound-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .sound-meta {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .sound-btn.active .sound-meta {
+    color: var(--accent-cyan);
+  }
+
+  /* Control bar (Play + Volume) */
+  .control-bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .play-trigger {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--grad-primary);
+    border: none;
+    color: #060913;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(0, 242, 254, 0.3);
+    transition: var(--transition-bounce);
+  }
+
+  .play-trigger:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 24px rgba(0, 242, 254, 0.5);
+  }
+
+  .play-trigger:active {
+    transform: scale(0.95);
+  }
+
+  .volume-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-grow: 1;
+    max-width: 250px;
+  }
+
+  .volume-icon {
+    color: var(--text-secondary);
+  }
+
+  .volume-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    transition: var(--transition-smooth);
+  }
+
+  .volume-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-bounce);
+  }
+
+  .volume-range::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+    background: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--accent-cyan);
+  }
+</style>
+
+<script>
+  // Web Audio Engine (Client Side)
+  let audioCtx: AudioContext | null = null;
+  let isPlaying = false;
+  let activeSound = 'white'; // default
+  let currentSourceNode: AudioNode | null = null;
+  let gainNode: GainNode | null = null;
+  let analyserNode: AnalyserNode | null = null;
+  let volume = 0.1;
+
+  // Cached buffers to save CPU
+  const noiseBuffers: { [key: string]: AudioBuffer } = {};
+  
+  // Binaural Beat Specific nodes
+  let oscL: OscillatorNode | null = null;
+  let oscR: OscillatorNode | null = null;
+
+  // Visualizer Animation ID
+  let visualizerAnimId: number | null = null;
+
+  // DOM Elements
+  const playBtn = document.getElementById('play-btn');
+  const playPath = document.getElementById('play-path');
+  const volumeRange = document.getElementById('volume-range') as HTMLInputElement;
+  const soundBtns = document.querySelectorAll('.sound-btn');
+  const soundLabel = document.getElementById('sound-state-label');
+  const canvas = document.getElementById('audio-visualizer') as HTMLCanvasElement;
+  const canvasCtx = canvas ? canvas.getContext('2d') : null;
+
+  // Noise Generation Algorithms
+  function createNoiseBuffers(ctx: AudioContext) {
+    const sampleRate = ctx.sampleRate;
+    const bufferSize = 2 * sampleRate; // 2 seconds of audio
+
+    // 1. White Noise Buffer
+    const whiteBuffer = ctx.createBuffer(1, bufferSize, sampleRate);
+    const whiteData = whiteBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      whiteData[i] = Math.random() * 2 - 1;
+    }
+    noiseBuffers['white'] = whiteBuffer;
+
+    // 2. Pink Noise Buffer (Kellet's Refined Method)
+    const pinkBuffer = ctx.createBuffer(1, bufferSize, sampleRate);
+    const pinkData = pinkBuffer.getChannelData(0);
+    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      b0 = 0.99886 * b0 + white * 0.0555179;
+      b1 = 0.99332 * b1 + white * 0.0750759;
+      b2 = 0.96900 * b2 + white * 0.1538520;
+      b3 = 0.86650 * b3 + white * 0.3104856;
+      b4 = 0.55000 * b4 + white * 0.5329522;
+      b5 = -0.7616 * b5 - white * 0.0168980;
+      pinkData[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+      pinkData[i] *= 0.11; // normalise volume rough estimation
+      b6 = white * 0.115926;
+    }
+    noiseBuffers['pink'] = pinkBuffer;
+
+    // 3. Brown Noise Buffer (Integration Method)
+    const brownBuffer = ctx.createBuffer(1, bufferSize, sampleRate);
+    const brownData = brownBuffer.getChannelData(0);
+    let lastOut = 0.0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      brownData[i] = (lastOut + (0.02 * white)) / 1.02;
+      lastOut = brownData[i];
+      brownData[i] *= 3.5; // normalise volume rough estimation
+    }
+    noiseBuffers['brown'] = brownBuffer;
+  }
+
+  // Initializing Web Audio Context
+  function initAudio() {
+    if (!audioCtx) {
+      // @ts-ignore
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContextClass();
+      
+      // Volume Controller Node
+      gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+      
+      // Analyser Node for Visualizer
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = 256;
+      
+      // Connections
+      gainNode.connect(analyserNode);
+      analyserNode.connect(audioCtx.destination);
+
+      createNoiseBuffers(audioCtx);
+    }
+  }
+
+  // Audio Play/Pause engine
+  function playSound() {
+    if (!audioCtx) return;
+    
+    // Stop any existing sound first
+    stopSound();
+
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    if (activeSound === 'binaural') {
+      // Setup Binaural beats (L: 140Hz, R: 146Hz, Diff: 6Hz - Theta wave for deep sleep/focus)
+      oscL = audioCtx.createOscillator();
+      oscR = audioCtx.createOscillator();
+      oscL.frequency.value = 140;
+      oscR.frequency.value = 146; // 6Hz delta
+
+      const pannerL = audioCtx.createStereoPanner();
+      const pannerR = audioCtx.createStereoPanner();
+      pannerL.pan.value = -1;
+      pannerR.pan.value = 1;
+
+      oscL.connect(pannerL).connect(gainNode!);
+      oscR.connect(pannerR).connect(gainNode!);
+
+      oscL.start(0);
+      oscR.start(0);
+      
+      // Make a dummy node reference for cancellation
+      currentSourceNode = oscL; // Node reference
+    } else {
+      // Play loop noise buffer
+      const buffer = noiseBuffers[activeSound];
+      if (!buffer) return;
+
+      const source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.loop = true;
+      source.connect(gainNode!);
+      source.start(0);
+      
+      currentSourceNode = source;
+    }
+
+    isPlaying = true;
+    updateUI();
+    animateVisualizer();
+  }
+
+  function stopSound() {
+    if (currentSourceNode) {
+      try {
+        if (activeSound === 'binaural') {
+          oscL?.stop();
+          oscR?.stop();
+          oscL?.disconnect();
+          oscR?.disconnect();
+        } else {
+          (currentSourceNode as AudioBufferSourceNode).stop();
+          currentSourceNode.disconnect();
+        }
+      } catch(e) {
+        // Suppress node already stopped error
+      }
+      currentSourceNode = null;
+    }
+    isPlaying = false;
+    updateUI();
+  }
+
+  // UI States
+  function updateUI() {
+    if (!playPath || !soundLabel) return;
+    
+    if (isPlaying) {
+      // Change icon to pause
+      playPath.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+      
+      // Set label status
+      const SoundTitles: { [key: string]: string } = {
+        white: 'Playing: Pure White Noise',
+        pink: 'Playing: Calibrated Pink Noise',
+        brown: 'Playing: Deep Brown Noise',
+        binaural: 'Playing: Binaural Theta Waves (6Hz Focus)'
+      };
+      soundLabel.textContent = SoundTitles[activeSound];
+      soundLabel.classList.add('playing');
+    } else {
+      // Change icon to play
+      playPath.setAttribute('d', 'M8 5v14l11-7z');
+      soundLabel.textContent = 'Acoustic generator paused';
+      soundLabel.classList.remove('playing');
+    }
+  }
+
+  // Visualizer drawing
+  function animateVisualizer() {
+    if (!canvas || !canvasCtx) return;
+
+    const width = canvas.width;
+    const height = canvas.height;
+    const bufferLength = analyserNode ? analyserNode.frequencyBinCount : 128;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function draw() {
+      visualizerAnimId = requestAnimationFrame(draw);
+
+      // Fetch audio data if playing, otherwise draw calm static wave
+      if (isPlaying && analyserNode) {
+        analyserNode.getByteTimeDomainData(dataArray);
+      } else {
+        // Draw standard breathing flat wave when paused
+        const time = Date.now() * 0.003;
+        for (let i = 0; i < bufferLength; i++) {
+          dataArray[i] = 128 + Math.sin(i * 0.15 + time) * 6 * Math.sin(time * 0.5);
+        }
+      }
+
+      // Draw background
+      canvasCtx!.fillStyle = 'rgba(6, 9, 19, 0.3)';
+      canvasCtx!.fillRect(0, 0, width, height);
+
+      // Define visual line style
+      canvasCtx!.lineWidth = 2.5;
+      
+      // Neon gradient for visualizer wave
+      const visualGradient = canvasCtx!.createLinearGradient(0, 0, width, 0);
+      visualGradient.addColorStop(0, '#00f2fe');
+      visualGradient.addColorStop(0.5, '#4facfe');
+      visualGradient.addColorStop(1, '#7f00ff');
+      canvasCtx!.strokeStyle = visualGradient;
+      canvasCtx!.shadowBlur = isPlaying ? 6 : 2;
+      canvasCtx!.shadowColor = '#00f2fe';
+
+      canvasCtx!.beginPath();
+
+      const sliceWidth = width / bufferLength;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = (v * height) / 2;
+
+        if (i === 0) {
+          canvasCtx!.moveTo(x, y);
+        } else {
+          canvasCtx!.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+
+      canvasCtx!.lineTo(width, height / 2);
+      canvasCtx!.stroke();
+    }
+
+    if (visualizerAnimId) {
+      cancelAnimationFrame(visualizerAnimId);
+    }
+    draw();
+  }
+
+  // Event Listeners
+  if (playBtn) {
+    playBtn.addEventListener('click', () => {
+      initAudio();
+      if (isPlaying) {
+        stopSound();
+      } else {
+        playSound();
+      }
+    });
+  }
+
+  if (volumeRange) {
+    volumeRange.addEventListener('input', (e) => {
+      const val = parseFloat((e.target as HTMLInputElement).value);
+      volume = val;
+      if (gainNode && audioCtx) {
+        gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+      }
+    });
+  }
+
+  soundBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const currentTarget = e.currentTarget as HTMLElement;
+      const sound = currentTarget.getAttribute('data-sound') || 'white';
+      
+      // Switch active class
+      soundBtns.forEach(b => b.classList.remove('active'));
+      currentTarget.classList.add('active');
+
+      activeSound = sound;
+
+      if (isPlaying) {
+        initAudio();
+        playSound(); // auto-restart with new sound if playing
+      } else {
+        // Just update UI label to show selection
+        if (soundLabel) {
+          const SoundTitles: { [key: string]: string } = {
+            white: 'Ready: Pure White Noise',
+            pink: 'Ready: Calibrated Pink Noise',
+            brown: 'Ready: Deep Brown Noise',
+            binaural: 'Ready: Binaural Theta Waves (6Hz Focus)'
+          };
+          soundLabel.textContent = SoundTitles[activeSound];
+        }
+      }
+    });
+  });
+
+  // Start calm idling visualizer on page load
+  animateVisualizer();
+</script>
