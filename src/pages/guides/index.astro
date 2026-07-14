@@ -1,0 +1,348 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const guidesEntries = await getCollection('library');
+
+// Unique categories
+const categories = ["All", ...new Set(guidesEntries.map(entry => entry.data.category))];
+---
+
+<Layout 
+  title="Functional Audio Guides - Learning Hub" 
+  description="Explore our learning hub for functional audio. Learn how different noise colors, binaural beats, and soundscapes can help support sleep, focus, and relaxation."
+>
+  <section class="guides-hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-container">
+      <span class="badge">Learning Hub</span>
+      <h1>Acoustic & Sound <br/><span class="text-gradient">Guides</span></h1>
+      <p class="hero-lead">
+        A collection of guides and explanations exploring how sound can shape mental states, mask auditory distractions, and promote deep rest. Learn how different audio profiles affect focus, sleep, and overall well-being.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filter & Grid Section -->
+  <section class="guides-grid-section">
+    <div class="container">
+      <!-- Filter controls -->
+      <div class="filter-container">
+        <span class="filter-label">Filter by Subject:</span>
+        <div class="filter-buttons">
+          {categories.map((cat, idx) => (
+            <button 
+              class={`filter-btn ${idx === 0 ? 'active' : ''}`} 
+              data-category={cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="articles-grid" id="articles-container">
+        {guidesEntries.map(entry => {
+          const { title, description, category, targetState, formula } = entry.data;
+          return (
+            <div class="glass-card article-card" data-category={category}>
+              <div class="card-header">
+                <span class="card-badge">{category}</span>
+                {formula && <span class="card-formula"><code>{formula}</code></span>}
+              </div>
+              
+              <div class="card-body">
+                <h3>{title.split(':')[0]}</h3>
+                <p>{description}</p>
+              </div>
+
+              <div class="card-footer">
+                <div class="target-mind">
+                  <span class="dot-indicator"></span>
+                  <span class="mind-text">{targetState}</span>
+                </div>
+                <a href={`/guides/${entry.id}`} class="read-btn">
+                  Read Guide →
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero Section */
+  .guides-hero {
+    position: relative;
+    padding: 7rem 2rem 4rem 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(127, 0, 255, 0.04) 60%, transparent 100%);
+    filter: blur(80px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    background: rgba(0, 242, 254, 0.08);
+    border: 1px solid rgba(0, 242, 254, 0.15);
+    color: var(--accent-cyan);
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .guides-hero h1 {
+    font-size: 3.8rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Grid & Filters */
+  .guides-grid-section {
+    padding: 2rem 0 6rem 0;
+  }
+
+  .filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    padding: 0.6rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .filter-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+  }
+
+  .filter-btn.active {
+    background: var(--grad-primary);
+    color: #060913;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+  }
+
+  /* Grid Layout */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .articles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Article Card */
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+    padding: 2.25rem;
+  }
+
+  .article-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 242, 254, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 
+                0 0 25px rgba(0, 242, 254, 0.06);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .card-badge {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .card-formula {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    background: rgba(79, 172, 254, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .card-body h3 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .card-body p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.25rem;
+    margin-top: auto;
+  }
+
+  .target-mind {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-cyan);
+    box-shadow: 0 0 6px var(--accent-cyan);
+  }
+
+  .mind-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .read-btn {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    transition: var(--transition-smooth);
+  }
+
+  .article-card:hover .read-btn {
+    color: var(--text-primary);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+</style>
+
+<script>
+  // Client-side Category Filter Logic
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const articleCards = document.querySelectorAll('.article-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // Toggle active states
+      filterButtons.forEach(b => b.classList.remove('active'));
+      const currentTarget = e.currentTarget as HTMLButtonElement;
+      currentTarget.classList.add('active');
+
+      const selectedCategory = currentTarget.getAttribute('data-category');
+
+      // Filter cards
+      articleCards.forEach(card => {
+        const cardElement = card as HTMLElement;
+        const cardCategory = cardElement.getAttribute('data-category');
+
+        if (selectedCategory === 'All' || cardCategory === selectedCategory) {
+          cardElement.style.display = 'flex';
+          // Minor reveal animation
+          cardElement.style.opacity = '0';
+          setTimeout(() => {
+            cardElement.style.opacity = '1';
+            cardElement.style.transition = 'opacity 0.4s ease';
+          }, 10);
+        } else {
+          cardElement.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
