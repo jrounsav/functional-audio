@@ -50,4 +50,5 @@ To get the most out of isochronic tones, follow these tips:
 1. **Choose the Right Frequency:** If you need to study, select a track pulsed at a Beta frequency (14 - 20 Hz). If you want to fall asleep, choose a Delta track (1 - 4 Hz).
 2. **Set Moderate Volumes:** Because isochronic tones are rhythmic, playing them too loudly can cause irritation. Keep the volume at a moderate background level—just loud enough to perceive the pulses.
 3. **Layer with Ambient Sounds:** To make the listening experience more enjoyable, look for tracks that mix isochronic tones with ocean waves, ambient pads, or rainfall. The brain still processes the pulses even if they are blended into other sounds.
+
 ---

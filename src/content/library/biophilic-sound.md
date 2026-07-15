@@ -54,4 +54,5 @@ In a massive meta-analysis published in the *Proceedings of the National Academy
 To utilize biophilic soundscapes for cognitive recovery:
 - **Combine with White/Brown Noise:** If you work in a noisy office, play a mix of brown noise and rainfall. The brown noise masks the sharp speech peaks, while the rainfall provides the restoring "soft fascination" for your brain.
 - **Take 10-Minute Breaks:** Instead of checking social media during work breaks (which continues to drain directed attention), close your eyes and listen to a pure nature soundscape for 10 minutes.
+
 ---

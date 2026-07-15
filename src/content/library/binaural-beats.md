@@ -62,4 +62,5 @@ In a comprehensive review published in *Frontiers in Human Neuroscience* (Chaieb
 
 ### 3. Synchrony across Hemispheres
 EEG research (Gao et al., 2014) shows that binaural beats promote hemispheric synchronization. In modern life, we are often left-hemisphere dominant (analytical/verbal). Encouraging synchronized firing across both the left and right hemispheres can unlock creative problem-solving and promote a state of mental flow.
+
 ---

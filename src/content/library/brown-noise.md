@@ -57,4 +57,5 @@ Deep noise profiles promote relaxation by decreasing cortical arousal and provid
 
 ### Deep Sleep Induction
 For people who struggle to fall asleep due to a racing mind, brown noise provides a uniform, predictable, and non-threatening auditory environment. The heavy rumble mimics the sound of the womb, triggering an evolutionary relaxation response that helps speed up sleep onset.
+
 ---
